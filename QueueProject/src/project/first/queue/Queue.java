@@ -8,10 +8,9 @@ public interface Queue {
 	
 	int front();
 	void empty();
-	boolean isEmpty();
-	boolean isFull();
 	
-	void repack();
-	void extend(int e);
+	default void repack() {
+		System.out.println("Repack is useless!");
+	}
 	void writeQue();
 }
