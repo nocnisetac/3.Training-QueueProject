@@ -14,6 +14,7 @@ public class RoundLinkedQueue implements Queue {
 		System.out.println("Inserted: "+x);
 	}
 
+	@SuppressWarnings("finally")
 	public int delete() {
 		if(front!=null) {
 			ListNode temp = front;
@@ -24,8 +25,14 @@ public class RoundLinkedQueue implements Queue {
 			return temp.i;
 		}
 		else {
-			System.out.println("Underflow!");
-			return 0;
+			//System.out.println("Underflow!");
+			try {
+				throw new UnderflowQException();
+			} catch (UnderflowQException e) {
+				System.out.println("Warning: " + e);
+			} finally {
+				return 0;
+			}
 		}
 	}
 
@@ -46,9 +53,16 @@ public class RoundLinkedQueue implements Queue {
 				System.out.print(" " + temp.i);
 				temp = temp.next;
 			}
-			System.out.println(" ]");
-		} else
-			System.out.println("Empty Queue!");
+			System.out.print(" ]");
+			System.out.println(" " + count + " elements");
+		} else {
+			// System.out.println("Empty Queue!");
+			try {
+				throw new EmptyQException();
+			} catch (EmptyQException e) {
+				System.out.println("Warning: " + e);
+			}
+		}
 	}
 
 }

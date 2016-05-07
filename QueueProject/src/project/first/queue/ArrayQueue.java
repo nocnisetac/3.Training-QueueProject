@@ -1,11 +1,12 @@
 package project.first.queue;
 
 public class ArrayQueue implements Queue{
-	private int front, rear, n;
+	private int front, rear, n, count;
 	private int[] que;
 	
 	public ArrayQueue (int n){
 		this.n = n;
+		count=0;
 		que = new int[n];
 		front = rear = -1;
 	}
@@ -16,26 +17,53 @@ public class ArrayQueue implements Queue{
 				this.repack();
 				System.out.println("Insert: "+x);
 				que[++rear]=x;
+				count++;
 			}
-			else System.out.println("Overflow!");
+			else {//System.out.println("Overflow!");
+				try {
+				 throw new OverflowQException();
+				} catch(OverflowQException e) {System.out.println("Warning: "+e);}
+			}
 		}
 		else { 
 			System.out.println("Insert: "+x);
 			que[++rear]=x;
+			count++;
 		}
 	}
 	
-	public int delete () {
-		if(this.isEmpty()) { System.out.println("Underflow!"); return 0;}
-		else {
-			System.out.println("Delete: "+que[front+1]);
+
+	@SuppressWarnings("finally")
+	public int delete() {
+		if (this.isEmpty()) {
+			// System.out.println("Underflow!");
+			try {
+				throw new UnderflowQException();
+			} catch (UnderflowQException e) {
+				System.out.println("Warning: " + e);
+			} finally {
+				return 0;
+			}
+		} else {
+			System.out.println("Delete: " + que[front + 1]);
+			count--;
 			return que[++front];
 		}
 	}
-	
+
+	@SuppressWarnings("finally")
 	public int front() {
-		if(this.isEmpty()) { System.out.println("Empty!"); return 0;}
-		else return que[front];
+		if (this.isEmpty()) {
+			// System.out.println("Empty!"); return 0;
+			try {
+				throw new EmptyQException();
+			} catch (EmptyQException e) {
+				System.out.println("Warning: " + e);
+			} finally {
+				return 0;
+			}
+		} else
+			return que[front];
 	}
 	
 	public void empty(){
@@ -68,11 +96,19 @@ public class ArrayQueue implements Queue{
 	}
 	
 	public void writeQue() {
-		if(this.isEmpty()) System.out.println("Queue is empty!");
+		if(this.isEmpty()) {
+			//System.out.println("Queue is empty!");
+			try {
+				throw new EmptyQException();
+			} catch ( EmptyQException e) {
+				System.out.println("Warning: " + e);
+			}
+		}
 		else {
 			System.out.print("Print Queue [");
 			for(int i = front+1; i<=rear; i++) System.out.print(" "+que[i]);
-			System.out.println(" ]");
+			System.out.print(" ]");
+			System.out.println(" " + count + " elements");
 		}
 	}
 }
