@@ -59,7 +59,6 @@ public class RoundBufferQueue implements Queue {
 		}
 	}
 
-	@SuppressWarnings("finally")
 	public int front() {
 		if (front == rear) {
 			//System.out.println("Empty!");
@@ -67,9 +66,8 @@ public class RoundBufferQueue implements Queue {
 				throw new EmptyQException();
 			} catch ( EmptyQException e) {
 				System.out.println("Warning: " + e);
-			} finally {
 				return 0;
-			}
+			} 
 		} else
 			return que[front];
 	}

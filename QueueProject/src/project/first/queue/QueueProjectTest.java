@@ -3,7 +3,7 @@ package project.first.queue;
 public class QueueProjectTest {
 
 	public static void main(String[] args) {
-		
+	
 	/*	ArrayQueue Q = new ArrayQueue(5);
 		Q.writeQue();
 		Q.delete();
@@ -24,11 +24,19 @@ public class QueueProjectTest {
 		RB.delete(); RB.delete(); RB.delete(); ;RB.writeQue();
 		RB.insert(25); RB.insert(26); RB.insert(27); RB.writeQue();  */   
 		
-		RoundLinkedQueue RL = new RoundLinkedQueue();
+	/*	RoundLinkedQueue RL = new RoundLinkedQueue();
 		RL.writeQue();
 		RL.delete();
 		RL.insert(30); RL.insert(31); RL.insert(32); RL.insert(33); RL.insert(34); RL.writeQue();
-		RL.delete(); RL.delete(); RL.writeQue();       
+		RL.delete(); RL.delete(); RL.writeQue();   */
+		
+	//	PriorLinkedQueue PLQ = new PriorLinkedQueue();
+	    PriorLinkedQueue<Integer> PLQ = new PriorLinkedQueue<Integer>();
+		PLQ.insert(40);  PLQ.insert(41);  PLQ.insert(48);  PLQ.insert(47); PLQ.insert(45);
+		PLQ.insert(39); PLQ.insert(38); PLQ.insert(50); PLQ.insert(41);
+		PLQ.writeQue();
+		PLQ.delete();
+		PLQ.writeQue(); System.out.println(PLQ.front());   
 		
 	}
 }
