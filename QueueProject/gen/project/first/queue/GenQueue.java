@@ -10,7 +10,7 @@ public interface GenQueue<T extends Comparable<T>> {
 	void empty();
 	
 	default void repack() {
-		System.out.println("Repack is useless!");
+		System.out.println("Repack is undefined!");
 	}
 	void writeQue();
 }

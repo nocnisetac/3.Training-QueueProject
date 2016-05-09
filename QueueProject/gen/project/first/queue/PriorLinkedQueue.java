@@ -6,7 +6,7 @@ public class PriorLinkedQueue <T extends Comparable<T>> implements GenQueue <T> 
 	private DListNode<T> front, rear;
 	private int count;
 	
-	public void insert(T x) {
+	public synchronized void insert(T x) {
 		DListNode<T> novi = new DListNode<T>(x);
 		DListNode<T> temp = front;
 		while (true) {
@@ -43,7 +43,7 @@ public class PriorLinkedQueue <T extends Comparable<T>> implements GenQueue <T> 
 	}
 	
 	
-	public T delete() {
+	public synchronized T delete() {
 		if(front==null) {
 			try {
 				throw new UnderflowQException();
@@ -66,7 +66,7 @@ public class PriorLinkedQueue <T extends Comparable<T>> implements GenQueue <T> 
 		}
 	}
 	
-	public T front() {
+	public synchronized T front() {
 		if(front==null) {
 			try {
 				throw new UnderflowQException();
@@ -78,11 +78,11 @@ public class PriorLinkedQueue <T extends Comparable<T>> implements GenQueue <T> 
 				return front.i;
 		}
 	}
-	public void empty() {
+	public synchronized void empty() {
 		front=rear=null;
 	}
 	
-	public void writeQue() {
+	public synchronized void writeQue() {
 		if (front != null) {
 			DListNode<T> temp = front;
 			System.out.print("Print Queue: [");

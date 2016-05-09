@@ -31,12 +31,22 @@ public class QueueProjectTest {
 		RL.delete(); RL.delete(); RL.writeQue();   */
 		
 	//	PriorLinkedQueue PLQ = new PriorLinkedQueue();
-	    PriorLinkedQueue<Integer> PLQ = new PriorLinkedQueue<Integer>();
-		PLQ.insert(40);  PLQ.insert(41);  PLQ.insert(48);  PLQ.insert(47); PLQ.insert(45);
-		PLQ.insert(39); PLQ.insert(38); PLQ.insert(50); PLQ.insert(41);
+	//  PriorLinkedQueue<Integer> PLQ = new PriorLinkedQueue<Integer>();
+	/*	PLQ.insert(40);  PLQ.insert(41);  PLQ.insert(48);  PLQ.insert(47); PLQ.insert(45);
+		PLQ.insert(39);  PLQ.insert(38);  PLQ.insert(50);  PLQ.insert(41);
 		PLQ.writeQue();
 		PLQ.delete();
-		PLQ.writeQue(); System.out.println(PLQ.front());   
+		PLQ.writeQue(); System.out.println(PLQ.front());     */
 		
+		PriorLinkedQueue<Integer> plq = new PriorLinkedQueue<Integer>();
+		TestThread t1 = new TestThread(1,plq);
+		TestThread t2 = new TestThread(2,plq);
+		try {
+			t1.join();
+			t2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		plq.writeQue();
 	}
 }
